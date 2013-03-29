@@ -22,17 +22,12 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-# This SlackBuilds requires ruby192
-#
-
 PRGNAM=puppet
-VERSION=${VERSION:-2.7.14}
+VERSION=${VERSION:-3.1.1}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_sid77}
+TAG=${TAG:-_SBo}
 
 # Select puppet's default user/group
-# At time of writing, 249 is the next available UID/GID couple over at
 # http://slackbuilds.org/uid_gid.txt
 PUPPET_USER=${PUPPET_USER:-puppet}
 PUPPET_UID=${PUPPET_UID:-249}
@@ -85,7 +80,7 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-ruby192 install.rb --destdir=$PKG
+ruby install.rb --destdir=$PKG
 
 # Save config file
 mv $PKG/etc/puppet/auth.conf $PKG/etc/puppet/auth.conf.new
@@ -107,10 +102,6 @@ cat $CWD/rc.puppetmaster.conf.new > $PKG/etc/rc.d/rc.puppetmaster.conf.new
 # Add sample configuration files
 cat $CWD/puppet.conf.sample-master > $PKG/etc/puppet/puppet.conf.sample-master
 cat $CWD/puppet.conf.sample-agent > $PKG/etc/puppet/puppet.conf.sample-agent
-
-## Compress man pages - for future reference
-#find $PKG/usr/man -type f -exec gzip -9 {} \;
-#for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION

@@ -16,8 +16,3 @@ remember to setup an appropriate /etc/puppet/puppet.conf and to populate both
 /etc/puppet/manifests and /etc/puppet/modules. Some sample files generated
 with the --genconfig option are shipped within /etc/puppet folder.
 
-Default server type for puppet master is webrick, support for mongrel is
-present but in order to use it you have to install the mongrel ruby library
-using ruby192: "gem192 install mongrel".
-
-This package requires facter and ruby192, available from sid77.slackware.it.
